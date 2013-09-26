@@ -8,6 +8,10 @@ public class InitializeGuiceModulesContextListener extends GuiceServletContextLi
 
     @Override
     protected Injector getInjector() {
-        return Guice.createInjector(new BindServicesModule(), new BindJerseyResourcesModule());
+        Injector parentInjector = Guice.createInjector(new BindServicesModule());
+
+        Injector childInjector = parentInjector.createChildInjector(new BindJerseyResourcesModule());
+        
+        return childInjector;
     }
 }

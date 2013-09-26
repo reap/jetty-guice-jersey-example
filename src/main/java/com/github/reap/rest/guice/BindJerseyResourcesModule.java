@@ -10,8 +10,13 @@ public class BindJerseyResourcesModule extends ServletModule {
 
     @Override
     protected void configureServlets() {
+        explictlyBindGuiceContainer();
         bindResources();
         serveBoundResources();
+    }
+
+    private void explictlyBindGuiceContainer() {
+        bind(GuiceContainer.class);
     }
 
     private void bindResources() {
